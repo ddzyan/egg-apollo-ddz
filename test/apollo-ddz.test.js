@@ -15,7 +15,8 @@ describe('test/apollo-ddz.test.js', () => {
   after(() => app.close());
   afterEach(mock.restore);
 
-  it('should GET /', () => {
+  it('should GET /', async () => {
+    await app.initApollo();
     assert(app.config.apolloConfig, 'apolloConfig apollo 配置获取失败');
   });
 });

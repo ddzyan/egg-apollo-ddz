@@ -45,3 +45,6 @@ app.config.apolloConfig.node_config
 
 ### 1.0.1
 1. 将初始化代码转移到appication中，给应用进行初始化
+
+### 1.0.2
+1. 解决单元测试中遇到的BUG
