@@ -46,12 +46,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-apollo-ddz.git"
+    "url": "git+https://github.com/ddzyan/egg-apollo-ddz"
   },
   "bugs": {
-    "url": "https://github.com/eggjs/egg/issues"
+    "url": "https://github.com/ddzyan/egg-apollo-ddz/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-apollo-ddz#readme",
+  "homepage": "https://github.com/ddzyan/egg-apollo-ddz#readme",
   "author": "ddz",
   "license": "MIT"
 }
