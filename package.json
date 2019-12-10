@@ -1,6 +1,6 @@
 {
   "name": "egg-apollo-ddz",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "egg apollo 插件",
   "eggPlugin": {
     "name": "apolloDdz",

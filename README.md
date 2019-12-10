@@ -48,3 +48,6 @@ app.config.apolloConfig.node_config
 
 ### 1.0.2
 1. 解决单元测试中遇到的BUG
+
+### 1.0.3
+1. 增加初始化完成的打印，用于debug
