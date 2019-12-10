@@ -9,6 +9,6 @@ describe('test/apollo_update_apollo_schdule.test.js', () => {
     await app.ready();
     await app.initApollo();
     await app.runSchedule('update_apollo');
-    assert(app.config.apolloConfig.node_config, 'apollo node_config 配置不存在');
+    assert(app.config.nodeConfig, 'apollo nodeConfig 配置不存在');
   });
 });

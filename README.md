@@ -34,9 +34,9 @@ apolloDdz: {
   }
 ```
 
-配置获取成功后，将会把获取的配置参数会转换为对象，保存在config.apolloConfig中，。如果设置了定时更新，则会不断更新内存中的配置，获取方式如下
+配置获取成功后，将会把获取的配置参数会转换为对象，保存在config对象中，。如果设置了定时更新，则会不断更新内存中的配置，获取方式如下
 ```js
-app.config.apolloConfig.node_config
+app.config.node_config
 ```
 
 ### 更新记录
@@ -51,3 +51,6 @@ app.config.apolloConfig.node_config
 
 ### 1.0.3
 1. 增加初始化完成的打印，用于debug
+
+### 1.0.4
+1. 将获得的 apollo 配置，添加到 config 对象中，并且修改单元测试文件

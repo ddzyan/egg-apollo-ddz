@@ -17,6 +17,6 @@ describe('test/apollo-ddz.test.js', () => {
 
   it('should GET /', async () => {
     await app.initApollo();
-    assert(app.config.apolloConfig, 'apolloConfig apollo 配置获取失败');
+    assert(app.config.nodeConfig, ' apollo 配置获取失败');
   });
 });

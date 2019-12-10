@@ -15,8 +15,8 @@ module.exports = app => {
       if (result && result.status === 304) {
         app.coreLogger.info('apollo 没有更新');
       } else {
-        Object.assign(app.config.apolloConfig, result);
-        app.coreLogger.info(`apollo 更新完成${new Date()}`, JSON.stringify(app.config.apolloConfig));
+        Object.assign(app.config, result);
+        app.coreLogger.info(`apollo 更新完成${new Date()}`, JSON.stringify(app.config));
       }
     },
   };
