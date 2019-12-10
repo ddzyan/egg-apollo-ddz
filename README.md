@@ -42,3 +42,6 @@ app.config.apolloConfig.node_config
 ### 更新记录
 #### 1.0.0
 1. 初始化代码，完成单元测试
+
+### 1.0.1
+1. 将初始化代码转移到appication中，给应用进行初始化
