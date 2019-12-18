@@ -5,6 +5,14 @@ egg apollo 配置，主要解决现有模块包 egg-apollo 以下问题：
 3. github 代码不开源，其他fork的模块包代码不是最新
 4. 源代码中缺少 test 单元测试文件，无法验证代码是否有效
 
+通过简单的配置，动态去 apollo 中心异步获取配置信息，并且在项目启动之前进行加载，并且能够解决例如 egg-suqelize 插件的数据库配置问题。
+
+### 设计思路
+1. 插件初始化时(beforstart)，在插件的 agant.js 中异步获取动态配置信息，输出到插件 config 目录下的 apollo-option.json 中
+2. 在插件 config 目录下的 config.default.js 进行读取加载 apollo-option.json 配置信息
+3. 修改 egg-development 中 ignore  文件，添加 apollo-option.json，否则会因为文件修改导致项目重启。
+4. 插件中设置定时器，定时异步获取动态配置信息，并且进行更新 this.config 对象
+5. 当项目意外停止或者正常关闭的时候，如果服务进行了注册则进行注销
 
 ### 使用
 #### 安装
@@ -29,8 +37,8 @@ apolloDdz: {
     clusterName: 'default',
     namespaceName: [ 'application' ], // 两个namespace相同配置，application配置会覆盖'python.mysql'
     apolloEnv: 'dev',
-    interval: '30s',
-    disable: true,
+    interval: '30s', // 动态属性时间
+    disable: true,// 是否设置动态刷新
   }
 ```
 
@@ -60,3 +68,6 @@ app.config.node_config
 
 ### 1.0.6
 1. 初始化完成，打印获取的配置信息
+
+### 1.0.7 
+1. 修改配置文件获取方式，解决例如 egg-sequelize 插件无法获取 apollo 配置的参数

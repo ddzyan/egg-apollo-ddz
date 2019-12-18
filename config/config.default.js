@@ -1,12 +1,5 @@
 'use strict';
-
-/**
- * egg-apollo-ddz default config
- * @member Config#apolloDdz
- * @property {String} SOME_KEY - some description
- */
-exports.apolloDdz = {
-  apolloDdz: {
-
-  },
+module.exports = () => {
+  const config = require('./apollo-config.json');
+  return config;
 };
