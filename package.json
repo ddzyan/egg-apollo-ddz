@@ -1,6 +1,6 @@
 {
   "name": "egg-apollo-ddz",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "egg apollo 插件",
   "eggPlugin": {
     "name": "apolloDdz",
@@ -38,7 +38,9 @@
   "files": [
     "app",
     "lib",
-    "config"
+    "config",
+    "agent.js",
+    "app.js"
   ],
   "ci": {
     "version": "8, 10"
