@@ -71,3 +71,6 @@ app.config.node_config
 
 ### 1.0.7 
 1. 修改配置文件获取方式，解决例如 egg-sequelize 插件无法获取 apollo 配置的参数
+
+### 1.10.0
+1. 解决在config.default.js中读取配置导致的BUG

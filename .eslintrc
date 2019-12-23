@@ -1,3 +1,13 @@
 {
-  "extends": "eslint-config-egg"
+  "env": {
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": "eslint-config-egg",
+  "rules": {
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ]
+  }
 }
