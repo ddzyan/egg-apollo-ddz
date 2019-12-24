@@ -74,3 +74,6 @@ app.config.node_config
 
 ### 1.10.0
 1. 解决在config.default.js中读取配置导致的BUG
+
+### 1.10.1
+1. 去除无关代码

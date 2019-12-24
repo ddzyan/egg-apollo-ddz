@@ -23,7 +23,6 @@ class AppBootHook {
     assert(this.agent.config.apolloDdz, 'apolloDdz config is required');
     const config = await apollo.remoteConfigServiceSikpCache(this.agent.config.apolloDdz);
 
-
     const configFilePath = __dirname + '/config/apollo-config.json';
 
     if (fs.existsSync(configFilePath)) {
