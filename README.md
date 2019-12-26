@@ -64,7 +64,7 @@ apolloDdz: {
 const fs = require('fs');
 const path = require('path');
 
-const apollo = require('./lib/apollo');
+const apollo = require('egg-apollo-ddz');
 
 const apolloConfigFilePath = path.join(__dirname, '/config/apollo.json');
 if (fs.existsSync(apolloConfigFilePath)) {
@@ -93,3 +93,6 @@ if (fs.existsSync(apolloConfigFilePath)) {
 ## 更新记录
 ### 2.0.0 大版本更新
 由于 egg loader 的加载机制首先会合并插件，框架和应用所有的config配置，所以在config中读取未生成的json文件会报错(json文件生成在config之后)。所以修改为在启动egg项目之前，执行fist_load.js脚本生成异步配置，用于egg启动后的config整合。
+
+### 2.0.2
+1. 修改package.json main 配置,优化使用方法
