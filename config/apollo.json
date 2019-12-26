@@ -5,5 +5,5 @@
   "namespaceName": [
     "application"
   ],
-  "apolloEnv": "dev",
+  "apolloEnv": "dev"
 }
