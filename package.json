@@ -1,8 +1,8 @@
 {
   "name": "egg-apollo-ddz",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "egg apollo 插件",
-  "main": "./fist_load.js",
+  "main": "./lib/apollo.js",
   "eggPlugin": {
     "name": "apolloDdz",
     "dependencies": [
