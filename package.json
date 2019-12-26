@@ -1,6 +1,6 @@
 {
   "name": "egg-apollo-ddz",
-  "version": "1.10.0",
+  "version": "2.0.0",
   "description": "egg apollo 插件",
   "eggPlugin": {
     "name": "apolloDdz",
@@ -27,7 +27,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
+    "test": "node fist_load.js && npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
@@ -39,7 +39,8 @@
     "app",
     "lib",
     "config",
-    "agent.js"
+    "agent.js",
+    "fist_load.js"
   ],
   "ci": {
     "version": "8, 10"

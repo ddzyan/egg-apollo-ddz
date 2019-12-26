@@ -1,7 +1,7 @@
 'use strict';
-const assert = require('assert');
+/* const assert = require('assert');
 const fs = require('fs');
-const apollo = require('./lib/apollo');
+const apollo = require('./lib/apollo'); */
 
 
 class AppBootHook {
@@ -20,17 +20,17 @@ class AppBootHook {
   }
 
   async willReady() {
-    assert(this.agent.config.apolloDdz, 'apolloDdz config is required');
-    const config = await apollo.remoteConfigServiceSikpCache(this.agent.config.apolloDdz);
+    /*   assert(this.agent.config.apolloDdz, 'apolloDdz config is required');
+      const config = await apollo.remoteConfigServiceSikpCache(this.agent.config.apolloDdz);
 
-    const configFilePath = __dirname + '/config/apollo-config.json';
+      const configFilePath = __dirname + '/config/apollo-config.json';
 
-    if (fs.existsSync(configFilePath)) {
-      fs.unlinkSync(configFilePath);
-    }
-    const configStr = JSON.stringify(config);
-    fs.appendFileSync(configFilePath, configStr);
-    this.agent.coreLogger.info(`apollo 初始化完成${new Date()}`);
+      if (fs.existsSync(configFilePath)) {
+        fs.unlinkSync(configFilePath);
+      }
+      const configStr = JSON.stringify(config);
+      fs.appendFileSync(configFilePath, configStr);
+      this.agent.coreLogger.info(`apollo 初始化完成${new Date()}`); */
   }
 
   async didReady() {

@@ -14,12 +14,14 @@ egg apollo 配置，主要解决现有模块包 egg-apollo 以下问题：
 4. 插件中设置定时器，定时异步获取动态配置信息，并且进行更新 this.config 对象
 5. 当项目意外停止或者正常关闭的时候，如果服务进行了注册则进行注销
 
-### 使用
-#### 安装
+
+## 使用
+### 安装
 ```
 yarn add egg-apollo-ddz
 ```
-#### 配置
+
+### 配置
 ```js
 // plugin.js
 exports.eggApollo = {
@@ -28,11 +30,11 @@ exports.eggApollo = {
 };
 ```
 
-#### 插件配置
-需要在config.*.js 文件中配置以下参数：
+### 插件配置
+需要在config/config.*.js 文件中配置以下参数：
 ```js
 apolloDdz: {
-    configServerUrl: 'http://10.199.5.241:8080',
+    configServerUrl: 'http://127.0.0.1:8080',
     appId: 'egg-gateway-eos', // 配置中心命名和项目名称保持一致,
     clusterName: 'default',
     namespaceName: [ 'application' ], // 两个namespace相同配置，application配置会覆盖'python.mysql'
@@ -42,38 +44,52 @@ apolloDdz: {
   }
 ```
 
-配置获取成功后，将会把获取的配置参数会转换为对象，保存在config对象中，。如果设置了定时更新，则会不断更新内存中的配置，获取方式如下
-```js
-app.config.node_config
+创建 /config/apollo.json 存放一份apollo配置
+```json
+{
+  "configServerUrl": "http://127.0.0.1:8080",
+  "appId": "plutus-node-eos",
+  "clusterName": "default",
+  "namespaceName": [
+    "application"
+  ],
+  "apolloEnv": "dev",
+}
 ```
 
-### 更新记录
-#### 1.0.0
-1. 初始化代码，完成单元测试
+在项目根目录下创建初始化脚本 fist_load.js
+```js
+'use strict';
 
-### 1.0.1
-1. 将初始化代码转移到appication中，给应用进行初始化
+const fs = require('fs');
+const path = require('path');
 
-### 1.0.2
-1. 解决单元测试中遇到的BUG
+const apollo = require('./lib/apollo');
 
-### 1.0.3
-1. 增加初始化完成的打印，用于debug
+const apolloConfigFilePath = path.join(__dirname, '/config/apollo.json');
+if (fs.existsSync(apolloConfigFilePath)) {
+  const configFilePath = path.join(__dirname, '/config/apollo-config.json');
+  if (fs.existsSync(configFilePath)) {
+    fs.unlinkSync(configFilePath);
+  }
 
-### 1.0.4
-1. 将获得的 apollo 配置，添加到 config 对象中，并且修改单元测试文件
+  const apolloConfig = require(apolloConfigFilePath);
+  apollo.remoteConfigServiceSikpCache(apolloConfig).then(config => {
+    const configStr = JSON.stringify(config);
+    fs.appendFileSync(configFilePath, configStr);
+    // fs.unlinkSync(configFilePath);
+    console.log('apollo 初始化完成');
+  }).catch(err => {
+    throw err;
+  });
+} else {
+  console.error(`${apolloConfigFilePath} not fund`);
+}
 
-### 1.0.5
-1. 去除无关的打印信息
+```
 
-### 1.0.6
-1. 初始化完成，打印获取的配置信息
+修改package.json文件中的启动脚本，添加 node fist_load.js，请参考项目中的配置
 
-### 1.0.7 
-1. 修改配置文件获取方式，解决例如 egg-sequelize 插件无法获取 apollo 配置的参数
-
-### 1.10.0
-1. 解决在config.default.js中读取配置导致的BUG
-
-### 1.10.1
-1. 去除无关代码
+## 更新记录
+### 2.0.0 大版本更新
+由于 egg loader 的加载机制首先会合并插件，框架和应用所有的config配置，所以在config中读取未生成的json文件会报错(json文件生成在config之后)。所以修改为在启动egg项目之前，执行fist_load.js脚本生成异步配置，用于egg启动后的config整合。
