@@ -31,17 +31,28 @@ exports.eggApollo = {
 ```
 
 ### 插件配置
-需要在config/config.*.js 文件中配置以下参数：
+需要在应用项目config/config.*.js 文件中配置以下参数:
+1. 读取异步获取的配置
+2. 设置apollo配置，用于定时刷新动态配置
 ```js
-apolloDdz: {
-    configServerUrl: 'http://127.0.0.1:8080',
-    appId: 'egg-gateway-eos', // 配置中心命名和项目名称保持一致,
-    clusterName: 'default',
-    namespaceName: [ 'application' ], // 两个namespace相同配置，application配置会覆盖'python.mysql'
-    apolloEnv: 'dev',
-    interval: '30s', // 动态属性时间
-    disable: true,// 是否设置动态刷新
-  }
+module.exports = appInfo => {
+  const apolloConfig = require('./apollo-config.json');
+  const defaultConfig = {
+      apolloDdz: {
+      configServerUrl: 'http://10.199.5.241:8080',
+      appId: 'plutus-node-eos', // 配置中心命名和项目名称保持一致,
+      clusterName: 'default', // 集群名称
+      namespaceName: ['application'], // 两个namespace相同配置，application配置会覆盖'python.mysql'
+      apolloEnv: 'dev',
+      interval: '30s',
+      disable: false,
+    },
+  };
+  return {
+    ...defaultConfig,
+    ...apolloConfig,
+  };
+};
 ```
 
 创建 /config/apollo.json 存放一份apollo配置
@@ -96,3 +107,27 @@ if (fs.existsSync(apolloConfigFilePath)) {
 
 ### 2.0.2
 1. 修改package.json main 配置,优化使用方法
+
+### 2.0.3
+1. 去除测试配置文件，防止出现与应用项目冲突
+
+如果需要运行单元测试，请先添加如下文件
+```
+//config.unittest.js
+'use strict';
+
+module.exports = () => {
+  return  {
+    apolloDdz: {
+      configServerUrl: 'http://10.199.5.241:8080',
+      appId: 'plutus-node-eos', // 配置中心命名和项目名称保持一致,
+      clusterName: 'default', // 集群名称
+      namespaceName: ['application'], // 两个namespace相同配置，application配置会覆盖'python.mysql'
+      apolloEnv: 'dev',
+      interval: '30s',
+      disable: false,
+    },
+  });
+};
+
+```
