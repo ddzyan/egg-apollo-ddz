@@ -2,13 +2,13 @@
 
 const apollo = require('../../lib/apollo');
 module.exports = app => {
-  const { interval, disable } = app.config.apolloDdz;
+  const { interval = '30s', disable = 'false' } = app.config.apolloDdz;
   return {
     schedule: {
-      interval: interval || '30s',
+      interval,
       immediate: true, // 这个定时 任务会在应用启动并 ready 后立刻执行一次这个定时任务
       type: 'worker', // 每台机器上只有一个 worker 会执行这个定时任务，每次执行定时任务的 worker 的选择是随机的,
-      disable: disable || true,
+      disable,
     },
     async task() {
       const result = await apollo.remoteConfigServiceSikpCache(app.config.apolloDdz);
